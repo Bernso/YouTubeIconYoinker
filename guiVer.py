@@ -39,6 +39,9 @@ class ConsoleApp(ctk.CTk):
         
         self.button = ctk.CTkButton(self, text="Start", command=self.on_submit)
         self.button.grid(column = 0, row = 3, **options)
+        
+        self.completeLabel = ctk.CTkLabel(self, text="", font=("Arial", 36))
+        self.completeLabel.grid(column = 1, row = 3, columnspan=2, **options)
 
     def on_submit(self):
         username = self.entry.get()
@@ -53,6 +56,10 @@ class ConsoleApp(ctk.CTk):
 
         yoinker = consoleVer.PfpYoink(username)
         yoinker.save_files(pfp=pfp, banner=banner, page=page)
+        self.completeLabel.configure(text='Complete')
+        logger.header("Complete")
+        self.after(5000, lambda: self.completeLabel.configure(text=''))
+
 
 
 if __name__ == "__main__":
